@@ -1,31 +1,27 @@
-name: Bad CI/CD Example
-
+name: Bad example
 on:
   push:
     branches:
       - main
-
 jobs:
+
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build project
+      - name: i without cache
         run: |
-          echo "Building..."
+          npm init -y
           npm install
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test project
+      - name: no timeouts
         run: |
-          echo "Running tests..."
-          npm test
+          echo "No timeouts"
+          sleep 5
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to production
+      - name: Checkout 
+        uses: actions/checkout@v1
+        
+      - name: Install dependencies
         run: |
-          echo "Deploying to production..."
-          scp -r ./build root@192.168.1.1:/var/www/html
+          sudo apt-get update
+          sudo apt-get install -y nodejs npm
