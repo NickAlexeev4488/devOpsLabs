@@ -32,4 +32,4 @@ jobs:
       - name: Set timeouts
         run: |
           echo "Running tasks with timeouts"
-          timeout 10m npm run build  # Устанавливаем таймаут для сборки
+          timeout 10s npm run build  # Устанавливаем таймаут для сборки
