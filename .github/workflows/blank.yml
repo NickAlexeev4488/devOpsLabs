@@ -7,11 +7,17 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04 # Используем конкретную версию
+    runs-on: ubuntu-22.04  # Указана конкретная версия Ubuntu
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3  # Используем последнюю версию actions/checkout
+
+      - name: Create package.json if not exists
+        run: |
+          if [ ! -f package.json ]; then
+            npm init -y  # Создаём package.json, если его нет
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
