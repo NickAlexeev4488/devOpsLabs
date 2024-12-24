@@ -1,0 +1,31 @@
+name: Poor CI/CD Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+  runs-on: ubuntu-latest
+    steps:
+      - name: Build project
+        run: |
+          echo "Building..."
+          npm install
+
+  test:
+  runs-on: ubuntu-latest
+    steps:
+      - name: Test project
+        run: |
+          echo "Running tests..."
+          npm test
+
+  deploy:
+  runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production..."
+          scp -r ./build root@192.168.1.1:/var/www/html
