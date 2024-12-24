@@ -4,16 +4,16 @@
   "description": "A sample project for CI/CD pipeline",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build",  // Пример скрипта сборки, можно заменить на реальный
-    "test": "echo \"Running tests...\" && exit 0",  // Пример тестов, замените на команду для тестов
-    "start": "node index.js"  // Пример скрипта для старта приложения
+    "build": "npm run build",
+    "test": "echo \"Running tests...\" && exit 0",
+    "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.17.1",  // Пример зависимости, используемой в проекте
-    "webpack": "^5.58.2"  // Пример зависимости для сборки (если требуется)
+    "express": "^4.17.1",
+    "webpack": "^5.58.2"
   },
   "devDependencies": {
-    "jest": "^27.4.5"  // Пример зависимости для тестирования (если требуется)
+    "jest": "^27.4.5"
   },
   "author": "Your Name",
   "license": "MIT"
