@@ -1,27 +1,39 @@
-name: Bad example
+name: Good Example
+
 on:
   push:
     branches:
       - main
+
 jobs:
-
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # Используем конкретную версию
+
     steps:
-      - name: i without cache
-        run: |
-          npm init -y
-          npm install
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Используем последнюю версию actions/checkout
 
-      - name: no timeouts
-        run: |
-          echo "No timeouts"
-          sleep 5
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Устанавливаем конкретную версию Node.js
 
-      - name: Checkout 
-        uses: actions/checkout@v1
-        
+      - name: Cache npm dependencies
+        uses: actions/cache@v3  # Используем кэширование зависимостей
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
+        run: npm install  # Устанавливаем зависимости без использования sudo
+
+      - name: Run tests
         run: |
-          sudo apt-get update
-          sudo apt-get install -y nodejs npm
+          npm test  # Добавляем тестирование проекта, если требуется
+
+      - name: Set timeouts
+        run: |
+          echo "Running tasks with timeouts"
+          timeout 10m npm run build  # Устанавливаем таймаут для сборки
